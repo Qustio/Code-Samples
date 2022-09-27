@@ -1,8 +1,16 @@
 package org.leetcode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * Add Two Numbers
+ * You are given two non-empty linked lists representing two non-negative integers.
+ * The digits are stored in reverse order, and each of their nodes contains a single digit.
+ * Add the two numbers and return the sum as a linked list.
+ * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+ */
 class ListNode {
     int val;
     ListNode next;
@@ -39,47 +47,24 @@ class ListNode {
         return ret;
     }
     static public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        List<Integer> list1 = new ArrayList<>();
-        do {
-            list1.add(l1.val);
-            l1 = l1.next;
-        } while (l1!=null);
-        List<Integer> list2 = new ArrayList<>();
-        do {
-            list2.add(l2.val);
-            l2 = l2.next;
-        } while (l2!=null);
-        // 342
-        int int1 = 0;
-        for (int i = list1.size()-1; i >= 0; --i) {
-            int1 += list1.get(i)*Math.pow(10, i);
+        return addTwoNumbers(l1, l2, 0);
+    }
+    static public ListNode addTwoNumbers(ListNode l1, ListNode l2, int carry) {
+        if (l1 == null && l2 == null && carry == 0) {
+            return null;
         }
-        // 465
-        int int2 = 0;
-        for (int i = list2.size()-1; i >= 0; --i) {
-            int2 += list2.get(i)*Math.pow(10, i);
-        }
-        // 807
-        int sum = int1 + int2;
-        // 708
-        ListNode l = null;
-        ListNode ptr = new ListNode(sum % 10);
-        sum = sum / 10;
-        while (sum!=0) {
-            l = ptr;
-            ptr = new ListNode(sum % 10, l);
-            sum = sum / 10;
-        }
-        ListNode prev = null;
-        ListNode next = null;
-        while (ptr != null) {
-            next = ptr.next;
-            ptr.next = prev;
-            prev = ptr;
-            ptr = next;
-        }
-        ptr = prev;
-        return ptr;
+        int val1 = l1 == null ? 0 : l1.val;
+        int val2 = l2 == null ? 0 : l2.val;
+
+        int sum = val1 + val2 + carry;
+
+        carry = sum / 10;
+
+        l1 = l1 != null ? l1.next:null;
+        l2 = l2 != null ? l2.next:null;
+        var a = new ListNode(sum%10, addTwoNumbers(l1, l2, carry));
+        System.out.println(sum%10);
+        return a;
     }
 }
 

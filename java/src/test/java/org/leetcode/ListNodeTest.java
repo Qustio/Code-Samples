@@ -12,9 +12,5 @@ class ListNodeTest {
         ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
         ListNode l3 = new ListNode(7, new ListNode(0, new ListNode(8)));
         Assertions.assertTrue(ListNode.compareTwoLists(ListNode.addTwoNumbers(l1, l2), l3));
-        l1 = new ListNode(9);
-        l2 = new ListNode(1, new ListNode(9, new ListNode(9, new ListNode(9,new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))))))))));
-        l3 = new ListNode(0, new ListNode(1, new ListNode(0, new ListNode(1))));
-        Assertions.assertTrue(ListNode.compareTwoLists(ListNode.addTwoNumbers(l1, l2), l3));
     }
 }
